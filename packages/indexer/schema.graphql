@@ -1,0 +1,86 @@
+type Token @entity {
+  id: ID! # token contract address
+  name: String!
+  symbol: String!
+  decimals: Int!
+  totalSupply: BigInt!
+  holders: [TokenHolder!] @derivedFrom(field: "token")
+  transfers: [Transfer!] @derivedFrom(field: "token")
+}
+
+type TokenHolder @entity {
+  id: ID! # address:tokenAddress
+  address: Account!
+  token: Token!
+  balance: BigInt!
+  transfersIn: [Transfer!] @derivedFrom(field: "to")
+  transfersOut: [Transfer!] @derivedFrom(field: "from")
+}
+
+type Account @entity {
+  id: ID! # address
+  tokens: [TokenHolder!] @derivedFrom(field: "address")
+  transfersIn: [Transfer!] @derivedFrom(field: "to")
+  transfersOut: [Transfer!] @derivedFrom(field: "from")
+  governance: GovernanceParticipation
+}
+
+type Transfer @entity {
+  id: ID! # tx hash + log index
+  blockNumber: Int!
+  timestamp: DateTime!
+  txHash: String!
+  from: Account!
+  to: Account!
+  token: Token!
+  amount: BigInt!
+}
+
+type GovernanceParticipation @entity {
+  id: ID! # account address
+  account: Account!
+  proposalsCreated: [Proposal!] @derivedFrom(field: "creator")
+  votes: [Vote!] @derivedFrom(field: "voter")
+}
+
+type Proposal @entity {
+  id: ID! # proposal id
+  title: String!
+  description: String!
+  creator: GovernanceParticipation!
+  startBlock: Int!
+  endBlock: Int!
+  status: ProposalStatus!
+  votes: [Vote!] @derivedFrom(field: "proposal")
+  forVotes: BigInt!
+  againstVotes: BigInt!
+  abstainVotes: BigInt!
+  executed: Boolean!
+}
+
+enum ProposalStatus {
+  PENDING
+  ACTIVE
+  CANCELED
+  DEFEATED
+  SUCCEEDED
+  QUEUED
+  EXPIRED
+  EXECUTED
+}
+
+type Vote @entity {
+  id: ID! # proposal id + voter address
+  proposal: Proposal!
+  voter: GovernanceParticipation!
+  support: VoteSupport!
+  weight: BigInt!
+  reason: String
+  timestamp: DateTime!
+}
+
+enum VoteSupport {
+  FOR
+  AGAINST
+  ABSTAIN
+}
