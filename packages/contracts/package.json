@@ -1,0 +1,37 @@
+{
+  "name": "@defi-dao-fund/contracts",
+  "version": "1.0.0",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy": "npx hardhat deploy",
+    "coverage": "npx hardhat coverage",
+    "slither": "slither . --exclude-low --exclude-informational",
+    "lint": "eslint tests scripts"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2",
+    "@openzeppelin/contracts-upgradeable": "^5.0.2",
+    "@chainlink/contracts": "^1.1.1",
+    "@layerzerolabs/solidity-examples": "^1.2.0",
+    "@bandprotocol/band-std-js": "^2.0.0",
+    "ethers": "^6.11.1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
+    "hardhat": "^2.22.2",
+    "hardhat-deploy": "^0.12.2",
+    "solidity-coverage": "^0.8.12",
+    "@openzeppelin/hardhat-upgrades": "^3.0.5",
+    "mocha": "^10.4.0",
+    "chai": "^5.1.0",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "dotenv": "^16.4.5",
+    "slither-analyzer": "^0.10.0",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0"
+  }
+}
