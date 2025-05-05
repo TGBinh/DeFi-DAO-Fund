@@ -1,0 +1,22 @@
+{
+  "name": "defi-dao-fund-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "lint": "npm run lint --workspaces",
+    "deploy": "npm run deploy --workspace=packages/contracts",
+    "indexer": "npm run start --workspace=packages/indexer",
+    "slither": "npm run slither --workspace=packages/contracts"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "typescript": "^5.3.3"
+  }
+}
