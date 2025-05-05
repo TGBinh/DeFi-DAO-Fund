@@ -1,0 +1,6 @@
+{
+  "name": "@defi-dao-fund/indexer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Indexer for DeFi-DAO-Fund AI analysis events"
+}
