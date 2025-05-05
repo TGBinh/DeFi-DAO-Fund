@@ -1,0 +1,23 @@
+name: CI
+on:
+  push:
+    branches: [feature/*]
+  pull_request:
+    branches: [feature/*]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run coverage
+        working-directory: ./packages/contracts
+      - run: npm run slither
+        working-directory: ./packages/contracts
+        env:
+          SLITHER_FAIL_ON: high,medium
